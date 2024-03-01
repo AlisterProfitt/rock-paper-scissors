@@ -1,6 +1,5 @@
 function getComputerChoice() {
     let diceRoll = Math.random();
-    console.log(diceRoll)
     let computerChoice;
     if (diceRoll < 0.33) {
         computerChoice = 'rock'
@@ -12,37 +11,45 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-console.log(getComputerChoice());
-
 function oneRoundGame(playerSelection, computerSelection) {
     let result;
     if (playerSelection.toLowerCase() == 'rock') {
         if (computerSelection.toLowerCase() == 'rock') {
-            result = 'Tied!';
+            result = 'Game Tied! Computer also chose Rock!';
         } else if (computerSelection.toLowerCase() == 'paper') {
-            result = 'Lost!';
+            result = 'You Lose! Computer chose Paper, and Paper covers Rock!';
         } else if (computerSelection.toLowerCase() == 'scissors') {
-            result = 'Won!';
+            result = 'You Win! Computer chose Scissors, and Rock breaks Scissors!';
         }
     } else if (playerSelection.toLowerCase() == 'paper') {
         if (computerSelection.toLowerCase() == 'rock') {
-            result = 'Won!';
+            result = 'You Win! Computer chose Rock, and Paper covers Rock!';
         } else if (computerSelection.toLowerCase() == 'paper') {
-            result = 'Tied!';
-        } else if (computerSelection.toLowerCase() === 'scissors') {
-            result = 'Lost!';
+            result = 'Game Tied! Computer also chose Paper!';
+        } else if (computerSelection.toLowerCase() == 'scissors') {
+            result = 'You Lose! Computer chose Scissors, and Scissors cuts Paper!';
         }
     } else if (playerSelection.toLowerCase() == 'scissors') {
         if (computerSelection.toLowerCase() == 'rock') {
-            result = 'Lost!';
-        } else if (computerSelection.toLowerCase() === 'paper') {
-            result = 'Won!';
+            result = 'You Lose! Computer chose Rock, and Rock breaks Scissors!';
+        } else if (computerSelection.toLowerCase() == 'paper') {
+            result = 'You Win! Computer chose Paper, and Scissors cuts Paper!';
         } else if (computerSelection.toLowerCase() == 'scissors') {
-            result = 'Tied!';
+            result = 'Tied! Computer also chose Scissors!';
         }
     }
     return result;
 }
 
-console.log(oneRoundGame('ScIsSOrS', 'rOCk'));
+function playGame() {
+    let rounds = parseInt(prompt('How many rounds of Rock Paper Scissors would you like to play?', ''));
+    for (let i = 0; i<rounds; i++) {
+    let playerSelection = prompt('What is your choice? Rock, Paper, or Scissors?', '');
+    let computerSelection = getComputerChoice();
+    result = oneRoundGame(playerSelection, computerSelection);
+    alert(result);
+    console.log(result);
+    }
+}
 
+playGame();
